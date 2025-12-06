@@ -1,14 +1,10 @@
-from typing import TYPE_CHECKING
-
-from sqlalchemy import String
-from sqlalchemy.orm import Mapped, mapped_column, relationship
-from app.database.database import Base
-
-if TYPE_CHECKING:
-    from app.models.users import UserModel
+from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey, Boolean, DECIMAL, DATE
+from sqlalchemy.orm import declarative_base, relationship,mapped_column,Mapped
+from datetime import datetime,date
+from .base import Base
 
 
-class RoleModel(Base):
+class Role(Base):
     __tablename__ = "roles"
 
     id: Mapped[int] = mapped_column(primary_key=True)

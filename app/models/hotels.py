@@ -1,20 +1,23 @@
-from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey, Boolean, DECIMAL, DATE
-from sqlalchemy.orm import declarative_base, relationship
-from datetime import datetime
+from __future__ import annotations  
 
-Base = declarative_base()
+from typing import List
+from sqlalchemy import String, Text, DECIMAL, DateTime, func
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+from datetime import datetime
+from .base import Base
+
 
 class Hotel(Base):
     __tablename__ = 'hotels'
 
-    hotel_id: Mapped[int] = mapped_column( primary_key=True, autoincrement=True)
-    name: Mapped[str] = mapped_column( nullable=False)
-    address: Mapped[Text] = mapped_column( nullable=False)
+    hotel_id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+    name: Mapped[str] = mapped_column(String(255), nullable=False)  
+    address: Mapped[str] = mapped_column(Text, nullable=False)      
     city: Mapped[str] = mapped_column(String(100), nullable=False)
     country: Mapped[str] = mapped_column(String(100), nullable=False)
-    rating: Mapped[DECIMAL] = mapped_column(DECIMAL(2, 1), nullable=True)
-    description:Mapped[Text] = mapped_column( nullable=True)
-    created_at: Mapped[DateTime] = mapped_column(DateTime, default=datetime.utcnow)
+    rating: Mapped[float | None] = mapped_column(DECIMAL(2, 1), nullable=True)
+    description: Mapped[str | None] = mapped_column(Text, nullable=True)
+    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
 
-    rooms = relationship("Room", back_populates="hotel")
-    reviews = relationship("Review", back_populates="hotel")
+    rooms: Mapped[List["Room"]] = relationship(back_populates="hotel")
+    reviews: Mapped[List["Review"]] = relationship(back_populates="hotel")
