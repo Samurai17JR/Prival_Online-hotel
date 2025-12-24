@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Каталог отелей — Привал Онлайн</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body class="roboto-slab-r1">
+  <header class="site-header">
+    <div class="container header-inner">
+       <a class="brand" href="/">
+        <span class="brand-mark">HB</span>
+        <span class="brand-name">Привал Онлайн</span>
+      </a>
+      <nav class="nav">
+        <a href="/catalog">Каталог отелей</a>
+        <a href="#" id="account-link">Личный кабинет</a>
+        <a href="#" id="auth-link">Авторизация</a>
+        <a href="#" id="register-link">Регистрация</a>
+        <button class="cart-btn" aria-label="Корзина">
+          <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M7 18a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm10 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4ZM6.3 6l.7 2h11l-1.4 7H8.1l-2-9H3V4h3.6a1 1 0 0 1 .97.74Z"/>
+          </svg>
+          <span class="cart-count">0</span>
+        </button>
+      </nav>
+      <button class="menu-toggle" aria-label="Меню">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Весь каталог отелей</h2>
+        <a class="link" href="/">На главную</a>
+        </div>
+
+        <div class="cards-grid" id="catalog-list">
+          <!-- Items rendered by script -->
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <h4>Контакты</h4>
+        <p>+7 (800) 555‑35‑35</p>
+        <p>support@hotel-booking.example</p>
+      </div>
+      <div>
+        <h4>Компания</h4>
+        <ul>
+          <li><a href="/about">О нас</a>
+        </ul>
+      </div>
+      <div>
+        <h4>Помощь</h4>
+        <ul>
+          <li><a href="#">Частые вопросы</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">
+      © Привал Онлайн, 2025
+    </div>
+  </footer>
+
+  <script type="module" src="/static/js/main.js"></script>
+</body>
+</html>

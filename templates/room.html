@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Номер — Привал Онлайн</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="roboto-slab-r1">
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">HB</span>
+        <span class="brand-name">Привал Онлайн</span>
+      </a>
+      <nav class="nav">
+        <a href="index.html">Каталог отелей</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container" id="room-detail"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <h4>Контакты</h4>
+        <p>+7 (800) 555‑35‑35</p>
+      </div>
+      <div>
+        <h4>Компания</h4>
+      </div>
+      <div>
+        <h4>Помощь</h4>
+      </div>
+    </div>
+    <div class="copyright">
+      © Привал Онлайн, 2025
+    </div>
+  </footer>
+
+  <script type="module">
+    const params = new URLSearchParams(location.search);
+    const hotel = params.get('hotel') || 'Отель';
+    const room = params.get('room') || 'standard';
+    const roomData = {
+      standard: { name: 'Стандартный номер', price: '4 500 ₽/ночь', desc: 'Уютный номер с базовыми удобствами.' },
+      deluxe: { name: 'Делюкс', price: '6 200 ₽/ночь', desc: 'Просторный номер с улучшенным сервисом.' }
+    }[room] || { name: 'Номер', price: 'цена по запросу', desc: '' };
+
+    document.getElementById('room-detail').innerHTML = `
+      <h1>${roomData.name} — ${decodeURIComponent(hotel)}</h1>
+      <div style="display:flex;gap:20px;flex-wrap:wrap;">
+        <div style="flex:1;min-width:300px;">
+          <img src="https://placehold.co/900x500/000000/F4EB49/png?text=${encodeURIComponent(roomData.name)}" alt="${roomData.name}" style="width:100%;border-radius:12px;"/>
+        </div>
+        <div style="flex:1;min-width:260px;">
+          <p style="color:var(--muted)">${roomData.desc}</p>
+          <p class="price" style="font-weight:800;color:var(--accent)">${roomData.price}</p>
+          <button class="btn-primary" id="bookBtn">Забронировать</button>
+        </div>
+      </div>
+    `;
+
+    document.getElementById('bookBtn').addEventListener('click', () => {
+      alert('Форма бронирования не настроена — пример кнопки.');
+    });
+  </script>
+</body>
+</html>

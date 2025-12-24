@@ -1,14 +1,14 @@
 from sqlalchemy import select
 from sqlalchemy.orm import selectinload
 
-from app.models.roles import RoleModel
+from app.models.roles import Role
 from app.repositories.base import BaseRepository
 from app.schemes.roles import SRoleGet
 from app.schemes.relations_users_roles import SRoleGetWithRels
 
 
 class RolesRepository(BaseRepository):
-    model = RoleModel
+    model = Role
     schema = SRoleGet
 
     async def get_one_or_none_with_users(self, **filter_by):

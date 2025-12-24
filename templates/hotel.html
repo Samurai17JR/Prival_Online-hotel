@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Отель — Привал Онлайн</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="roboto-slab-r1">
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">HB</span>
+        <span class="brand-name">Привал Онлайн</span>
+      </a>
+      <nav class="nav">
+        <a href="index.html">Каталог отелей</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="section">
+      <div class="container">
+        <div id="hotel-detail"></div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <h4>Контакты</h4>
+        <p>+7 (800) 555‑35‑35</p>
+        <p>support@hotel-booking.example</p>
+      </div>
+      <div>
+        <h4>Компания</h4>
+        <ul>
+          <li><a href="about.html">О нас</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Помощь</h4>
+        <ul>
+          <li><a href="#">Частые вопросы</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">
+      © Привал Онлайн, 2025
+    </div>
+  </footer>
+
+  <script type="module">
+    // simple renderer: reads ?hotel=Name and shows basic hotel + rooms with links to room.html
+    const params = new URLSearchParams(location.search);
+    const hotelName = params.get('hotel') || 'Выбранный отель';
+    const data = {
+      title: decodeURIComponent(hotelName).replace(/\+/g, ' '),
+      description: 'Описание отеля, удобства, расположение и отзывы.',
+      price: 'от 4 500 ₽/ночь',
+      images: [
+        'https://placehold.co/900x500/000000/F4EB49/png?text=' + encodeURIComponent(hotelName)
+      ],
+      rooms: [
+        { id: 'standard', name: 'Стандартный номер', price: '4 500 ₽/ночь' },
+        { id: 'deluxe', name: 'Делюкс', price: '6 200 ₽/ночь' }
+      ]
+    };
+
+    const container = document.getElementById('hotel-detail');
+    container.innerHTML = `
+      <div class="hotel-page">
+        <div style="display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap;">
+          <div style="flex:1;min-width:320px;">
+            <img src="${data.images[0]}" alt="${data.title}" style="width:100%;border-radius:12px;"/>
+          </div>
+          <div style="flex:1;min-width:300px;">
+            <h1 style="margin-top:0">${data.title}</h1>
+            <p style="color:var(--muted)">${data.description}</p>
+            <p class="price" style="font-weight:800;color:var(--accent)">${data.price}</p>
+            <a class="btn-primary" href="#rooms">Выбрать номер</a>
+          </div>
+        </div>
+
+        <h2 id="rooms" style="margin-top:28px">Номера</h2>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+          ${data.rooms.map(r => `
+            <div class="card">
+              <div class="card-body">
+                <h3>${r.name}</h3>
+                <div class="meta"><span class="price">${r.price}</span></div>
+                <a class="btn-outline" href="room.html?hotel=${encodeURIComponent(data.title)}&room=${r.id}">Подробнее и бронирование</a>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    `;
+  </script>
+</body>
+</html>

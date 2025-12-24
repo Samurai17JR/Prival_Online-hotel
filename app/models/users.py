@@ -15,5 +15,5 @@ class User(Base):
     phone: Mapped[str | None] = mapped_column(String(20), nullable=True)
     created_at: Mapped[datetime] = mapped_column(DateTime, default=func.now())
 
-    bookings: Mapped[List["Booking"]] = relationship(back_populates="user")
-    reviews: Mapped[List["Review"]] = relationship(back_populates="user")
+    bookings: Mapped[List["Booking"]] = relationship(back_populates="users")
+    reviews: Mapped[List["Review"]] = relationship(back_populates="users")

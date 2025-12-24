@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Привал Онлайн</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@100..900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body class="roboto-slab-r1">
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#">
+        <span class="brand-mark">HB</span>
+        <span class="brand-name">Привал Онлайн</span>
+      </a>
+      <form class="search" role="search">
+        <input type="search" placeholder="Поиск отеля, города..." aria-label="Поиск" />
+        <button type="submit">Найти</button>
+      </form>
+      <nav class="nav">
+        <a href="/catalog">Каталог отелей</a>
+        <a href="#" id="account-link">Личный кабинет</a>
+        <a href="#" id="auth-link">Авторизация</a>
+        <a href="#" id="register-link">Регистрация</a>
+        <button class="cart-btn" aria-label="Корзина">
+          <svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true">
+            <path fill="currentColor" d="M7 18a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm10 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4ZM6.3 6l.7 2h11l-1.4 7H8.1l-2-9H3V4h3.6a1 1 0 0 1 .97.74Z"/>
+          </svg>
+          <span class="cart-count">0</span>
+        </button>
+      </nav>
+      <button class="menu-toggle" aria-label="Меню">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container hero-inner">
+        <div class="hero-content">
+          <h1>Выбирайте отели и отдыхайте с комфортом</h1>
+          <p>Подбор лучших предложений по цене и расположению. Простой поиск, прозрачные условия.</p>
+          <div class="hero-actions">
+            <a class="btn-primary" href="#popular">Выбрать</a>
+            <a class="btn-secondary" href="#catalog">Смотреть каталог</a>
+          </div>
+        </div>
+        <div class="hero-art" aria-hidden="true"></div>
+      </div>
+    </section>
+
+    <section id="popular" class="section">
+      <div class="container">
+        <div class="section-head">
+          <h2>Популярные отели</h2>
+          <a class="link" href="#catalog">Весь каталог</a>
+        </div>
+        <div class="cards-grid">
+          <article class="card">
+            <a class="card-link" href="hotel.html?hotel=Hotel+A">
+              <img src="https://placehold.co/600x400/000000/F4EB49/png?text=Hotel+A" alt="Hotel A">
+            </a>
+            <div class="card-body">
+              <h3><a class="card-link" href="hotel.html?hotel=Hotel+A">Hotel A — Центр</a></h3>
+              <div class="meta">
+                <span class="price">от 4 500 ₽/ночь</span>
+                <span class="stars" aria-label="Рейтинг 4 из 5">★★★★☆</span>
+              </div>
+              <button class="btn-outline">Добавить в корзину</button>
+            </div>
+          </article>
+          <article class="card">
+            <a class="card-link" href="hotel.html?hotel=Hotel+B">
+              <img src="https://placehold.co/600x400/000000/F4EB49/png?text=Hotel+B" alt="Hotel B">
+            </a>
+            <div class="card-body">
+              <h3><a class="card-link" href="hotel.html?hotel=Hotel+B">Hotel B — Набережная</a></h3>
+              <div class="meta">
+                <span class="price">от 6 200 ₽/ночь</span>
+                <span class="stars" aria-label="Рейтинг 5 из 5">★★★★★</span>
+              </div>
+              <button class="btn-outline">Добавить в корзину</button>
+            </div>
+          </article>
+          <article class="card">
+            <a class="card-link" href="hotel.html?hotel=Hotel+C">
+              <img src="https://placehold.co/600x400/000000/F4EB49/png?text=Hotel+C" alt="Hotel C">
+            </a>
+            <div class="card-body">
+              <h3><a class="card-link" href="hotel.html?hotel=Hotel+C">Hotel C — Парковая зона</a></h3>
+              <div class="meta">
+                <span class="price">от 3 900 ₽/ночь</span>
+                <span class="stars" aria-label="Рейтинг 4 из 5">★★★★☆</span>
+              </div>
+              <button class="btn-outline">Добавить в корзину</button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section seasonal">
+      <div class="container">
+        <div class="section-head">
+          <h2>Сезонный выбор</h2>
+          <div class="filters">
+            <button class="chip active" data-filter="all">Все</button>
+            <button class="chip" data-filter="sea">Море</button>
+            <button class="chip" data-filter="mountain">Горы</button>
+            <button class="chip" data-filter="city">Город</button>
+          </div>
+        </div>
+        <div class="cards-grid">
+          <article class="card" data-tags="sea">
+            <a class="card-link" href="hotel.html?hotel=Sea+Resort">
+              <img src="https://placehold.co/600x400/000000/F4EB49/png?text=Sea+Resort" alt="Sea Resort">
+            </a>
+            <div class="card-body">
+              <h3><a class="card-link" href="hotel.html?hotel=Sea+Resort">Sea Resort</a></h3>
+              <div class="meta">
+                <span class="price">от 7 800 ₽/ночь</span>
+                <span class="stars" aria-label="Рейтинг 5 из 5">★★★★★</span>
+              </div>
+              <button class="btn-outline">Добавить в корзину</button>
+            </div>
+          </article>
+          <article class="card" data-tags="mountain">
+            <a class="card-link" href="hotel.html?hotel=Mountain+Lodge">
+              <img src="https://placehold.co/600x400/000000/F4EB49/png?text=Mountain+Lodge" alt="Mountain Lodge">
+            </a>
+            <div class="card-body">
+              <h3><a class="card-link" href="hotel.html?hotel=Mountain+Lodge">Mountain Lodge</a></h3>
+              <div class="meta">
+                <span class="price">от 5 600 ₽/ночь</span>
+                <span class="stars" aria-label="Рейтинг 4 из 5">★★★★☆</span>
+              </div>
+              <button class="btn-outline">Добавить в корзину</button>
+            </div>
+          </article>
+          <article class="card" data-tags="city">
+            <a class="card-link" href="hotel.html?hotel=City+Boutique">
+              <img src="https://placehold.co/600x400/000000/F4EB49/png?text=City+Boutique" alt="City Boutique">
+            </a>
+            <div class="card-body">
+              <h3><a class="card-link" href="hotel.html?hotel=City+Boutique">City Boutique</a></h3>
+              <div class="meta">
+                <span class="price">от 4 100 ₽/ночь</span>
+                <span class="stars" aria-label="Рейтинг 3 из 5">★★★☆☆</span>
+              </div>
+              <button class="btn-outline">Добавить в корзину</button>
+            </div>
+          </article>
+          <article class="card" data-tags="sea">
+            <a class="card-link" href="hotel.html?hotel=Coastal+Inn">
+              <img src="https://placehold.co/600x400/000000/F4EB49/png?text=Coastal+Inn" alt="Coastal Inn">
+            </a>
+            <div class="card-body">
+              <h3><a class="card-link" href="hotel.html?hotel=Coastal+Inn">Coastal Inn</a></h3>
+              <div class="meta">
+                <span class="price">от 6 300 ₽/ночь</span>
+                <span class="stars" aria-label="Рейтинг 4 из 5">★★★★☆</span>
+              </div>
+              <button class="btn-outline">Добавить в корзину</button>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div>
+        <h4>Контакты</h4>
+        <p>+7 (800) 555‑35‑35</p>
+        <p>support@hotel-booking.example</p>
+        <div class="socials">
+          <a href="#" aria-label="VK">VK</a>
+          <a href="#" aria-label="Telegram">TG</a>
+          <a href="#" aria-label="YouTube">YT</a>
+        </div>
+      </div>
+      <div>
+        <h4>Компания</h4>
+        <ul>
+          <li><a href="about.html">О нас</a></li>
+          <li><a href="#">Новости</a></li>
+          <li><a href="#">Партнёрам</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Помощь</h4>
+        <ul>
+          <li><a href="#">Частые вопросы</a></li>
+          <li><a href="#">Условия бронирования</a></li>
+          <li><a href="#">Политика конфиденциальности</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">
+      © Hotel Booking, 2025
+    </div>
+  </footer>
+
+ <script type="module" src="/static/js/main.js"></script>
+</body>
+</html>
