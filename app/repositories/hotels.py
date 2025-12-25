@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import Optional
 from sqlalchemy import select, func
 from app.models.hotels import Hotel
 from app.repositories.base import BaseRepository
@@ -16,7 +16,7 @@ class HotelsRepository(BaseRepository):
         rating_min: Optional[float] = None,
         name: Optional[str] = None,
         limit: int = 50,
-    ) -> List[Hotel]:
+    ) -> list[Hotel]:
         query = select(self.model)
         if city:
             query = query.where(self.model.city.ilike(f"%{city}%"))
@@ -30,7 +30,7 @@ class HotelsRepository(BaseRepository):
         result = await self.session.execute(query)
         return list(result.scalars().all())
 
-    async def get_top(self, limit: int) -> List[Hotel]:
+    async def get_top(self, limit: int) -> list[Hotel]:
         query = select(self.model).order_by(self.model.rating.desc()).limit(limit)
         result = await self.session.execute(query)
         return list(result.scalars().all())
@@ -40,7 +40,7 @@ class HotelsRepository(BaseRepository):
         result = await self.session.execute(query)
         return result.scalar_one()
 
-    async def get_by_country(self, country: str) -> List[Hotel]:
+    async def get_by_country(self, country: str) -> list[Hotel]:
         query = select(self.model).where(self.model.country.ilike(f"%{country}%"))
         result = await self.session.execute(query)
         return list(result.scalars().all())

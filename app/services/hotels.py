@@ -1,4 +1,4 @@
-from typing import List, Optional
+from typing import Optional
 from app.models.hotels import Hotel
 from app.schemes.hotels import SHotelAdd, SHotelPatch, SHotelGet
 from app.services.base import BaseService
@@ -14,7 +14,7 @@ class HotelService(BaseService):
         await self.db.commit()
         return {"status": "OK"}
 
-    async def get_hotels(self, limit: int | None = None, offset: int | None = None) -> List[SHotelGet]:
+    async def get_hotels(self, limit: int | None = None, offset: int | None = None) -> list[SHotelGet]:
         hotels = await self.db.hotels.get_all(limit=limit, offset=offset)
         return [SHotelGet.model_validate(hotel) for hotel in hotels]
 

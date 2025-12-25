@@ -1,6 +1,6 @@
 
 from fastapi import APIRouter, HTTPException, Query
-from typing import List, Optional
+from typing import Optional
 
 from app.api.dependencies import DBDep
 from app.schemes.hotels import SHotelAdd, SHotelGet, SHotelPatch
@@ -14,7 +14,7 @@ async def get_hotels(
     db: DBDep,
     limit: int | None = None,
     offset: int | None = None,
-) -> List[SHotelGet]:
+) -> list[SHotelGet]:
     return await HotelService(db).get_hotels(limit=limit, offset=offset)
 
 
@@ -54,7 +54,7 @@ async def search_hotels(
     rating_min: Optional[float] = Query(None),
     name: Optional[str] = Query(None),
     limit: int = Query(50, ge=1, le=100),
-) -> List[SHotelGet]:
+) -> list[SHotelGet]:
     return await HotelService(db).search_hotels(
         city=city,
         country=country,
@@ -68,7 +68,7 @@ async def search_hotels(
 async def get_top_hotels(
     db: DBDep,
     limit: int = Query(5, ge=1, le=20)
-) -> List[SHotelGet]:
+) -> list[SHotelGet]:
     return await HotelService(db).get_top_hotels(limit=limit)
 
 
@@ -79,7 +79,7 @@ async def get_hotels_count(db: DBDep) -> dict[str, int]:
 
 
 @router.get("/by-country/{country}", summary="Отели по стране")
-async def get_hotels_by_country(country: str, db: DBDep) -> List[SHotelGet]:
+async def get_hotels_by_country(country: str, db: DBDep) -> list[SHotelGet]:
     hotels = await HotelService(db).get_hotels_by_country(country)
     if not hotels:
         raise HTTPException(status_code=404, detail=f"Нет отелей в стране '{country}'")
