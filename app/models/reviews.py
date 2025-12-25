@@ -10,7 +10,7 @@ class Review(Base):
     __tablename__ = 'reviews'
 
     review_id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
-    user_id: Mapped[int] = mapped_column(ForeignKey('users.user_id'), nullable=False)
+    user_id: Mapped[int] = mapped_column(ForeignKey('users.id'), nullable=False)
     hotel_id: Mapped[int] = mapped_column(ForeignKey('hotels.hotel_id'), nullable=False)
     rating: Mapped[int] = mapped_column(Integer, nullable=False)  
     comment: Mapped[str] = mapped_column(Text, nullable=True)

@@ -15,7 +15,7 @@ class Booking(Base):
     __tablename__ = 'bookings'
 
     booking_id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
-    user_id: Mapped[int] = mapped_column(ForeignKey('users.user_id'), nullable=False)
+    user_id: Mapped[int] = mapped_column(ForeignKey('users.id'), nullable=False)
     room_id: Mapped[int] = mapped_column(ForeignKey('rooms.room_id'), nullable=False)
     check_in_date: Mapped[date] = mapped_column(DATE,nullable=False)
     check_out_date: Mapped[date] = mapped_column(DATE,nullable=False)

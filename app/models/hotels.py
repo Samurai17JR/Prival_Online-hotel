@@ -17,7 +17,6 @@ class Hotel(Base):
     country: Mapped[str] = mapped_column(String(100), nullable=False)
     rating: Mapped[float | None] = mapped_column(DECIMAL(2, 1), nullable=True)
     description: Mapped[str | None] = mapped_column(Text, nullable=True)
-    created_at: Mapped[datetime] = mapped_column(DateTime, default=datetime.utcnow)
-
+   
     rooms: Mapped[List["Room"]] = relationship(back_populates="hotel")
     reviews: Mapped[List["Review"]] = relationship(back_populates="hotel")

@@ -54,17 +54,12 @@ class BaseRepository:
 
     async def add(self, data: BaseModel):
         try:
-            add_stmt = (
-                insert(self.model).values(**data.model_dump()).returning(self.model)
-            )
+            add_stmt = insert(self.model).values(**data.model_dump())
             # print(add_stmt.compile(compile_kwargs={"literal_binds": True}))
 
-            result = await self.session.execute(add_stmt)
+            await self.session.execute(add_stmt)
 
-            model = result.scalars().one_or_none()
-            if model is None:
-                return None
-            return self.schema.model_validate(model, from_attributes=True)
+            return None
 
         except IntegrityError as exc:
             raise ObjectAlreadyExistsError from exc
