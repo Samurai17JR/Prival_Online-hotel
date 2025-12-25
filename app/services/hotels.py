@@ -1,13 +1,17 @@
 from app.exceptions.base import ObjectAlreadyExistsError
 from app.exceptions.roles import RoleAlreadyExistsError
+
 from app.models.hotels import Hotel
 from app.schemes.hotels import SHotelAdd, SHotelPatch
+
+from app.schemes.hotels import SHotelAdd
 from app.services.base import BaseService
 
 
 class HotelService(BaseService):
 
     async def create_hotel(self, hotel_data: SHotelAdd):
+
         hotel = Hotel(**hotel_data.model_dump())
         self.db.add(hotel)
         await self.db.flush()
@@ -28,3 +32,14 @@ class HotelService(BaseService):
     async def delete_hotel(self, hotel_id: int):
         await self.db.hotels.delete(hotel_id=hotel_id)
         return {"status": "OK"}
+        
+        hotel = await self.db.hotels.add(hotel_data)
+        await self.db.commit()
+        return hotel
+
+    async def get_hotels(self):
+        return await self.db.hotels.get_all()
+
+
+   
+

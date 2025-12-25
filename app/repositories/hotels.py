@@ -6,3 +6,5 @@ from app.schemes.hotels import SHotelGet
 class HotelsRepository(BaseRepository):
     model = Hotel
     schema = SHotelGet
+    schema = SHotelGet
+

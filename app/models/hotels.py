@@ -4,7 +4,9 @@ from typing import List
 from sqlalchemy import String, Text, DECIMAL, DateTime, func
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from datetime import datetime
-from .base import Base
+
+from app.database.database import Base
+
 
 
 class Hotel(Base):
@@ -20,3 +22,7 @@ class Hotel(Base):
    
     rooms: Mapped[List["Room"]] = relationship(back_populates="hotel")
     reviews: Mapped[List["Review"]] = relationship(back_populates="hotel")
+
+    # rooms: Mapped[List["Room"]] = relationship(back_populates="hotel")
+    # reviews: Mapped[List["Review"]] = relationship(back_populates="hotel")
+
