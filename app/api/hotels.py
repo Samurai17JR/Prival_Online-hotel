@@ -1,5 +1,6 @@
 
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, Query
+from typing import List, Optional
 
 from app.api.dependencies import DBDep
 from app.schemes.hotels import SHotelAdd, SHotelGet, SHotelPatch
@@ -13,7 +14,7 @@ async def get_hotels(
     db: DBDep,
     limit: int | None = None,
     offset: int | None = None,
-) -> list[SHotelGet]:
+) -> List[SHotelGet]:
     return await HotelService(db).get_hotels(limit=limit, offset=offset)
 
 
@@ -41,44 +42,46 @@ async def update_hotel(hotel_id: int, hotel_data: SHotelPatch, db: DBDep) -> SHo
 @router.delete("/{hotel_id}", summary="Удалить отель")
 async def delete_hotel(hotel_id: int, db: DBDep) -> dict[str, str]:
     return await HotelService(db).delete_hotel(hotel_id)
-from fastapi import APIRouter
-from fastapi import HTTPException
-
-from app.api.dependencies import DBDep, IsAdminDep
-from app.exceptions.roles import (
-    RoleAlreadyExistsError,
-    RoleAlreadyExistsHTTPError,
-    RoleNotFoundError,
-    RoleNotFoundHTTPError,
-)
-from app.schemes.hotels import SHotelAdd, SHotelGet
-from app.schemes.roles import SRoleAdd, SRoleGet
-from app.schemes.relations_users_roles import SRoleGetWithRels
-from app.services.hotels import HotelService
-from app.services.roles import RoleService
-
-router = APIRouter(prefix="", tags=["Управление отелями"])
 
 
-@router.post("/hotels", summary="Создание новой роли")
-async def create_new_hotel(
-    hotel_data: SHotelAdd,
+# === НОВЫЕ РУЧКИ ===
+
+@router.get("/search", summary="Поиск отелей по параметрам")
+async def search_hotels(
     db: DBDep,
-) -> dict[str, str]:
-    
-    hotels = await HotelService(db).create_hotel(hotel_data)
-    
-    if hotels is None:
-        raise HTTPException(status_code=404)
-    
-    return {"status": "OK"}
+    city: Optional[str] = Query(None),
+    country: Optional[str] = Query(None),
+    rating_min: Optional[float] = Query(None),
+    name: Optional[str] = Query(None),
+    limit: int = Query(50, ge=1, le=100),
+) -> List[SHotelGet]:
+    return await HotelService(db).search_hotels(
+        city=city,
+        country=country,
+        rating_min=rating_min,
+        name=name,
+        limit=limit,
+    )
 
 
-@router.get("/hotels", summary="Получение списка ролей")
-async def get_all_roles(
+@router.get("/top", summary="Топ отелей по рейтингу")
+async def get_top_hotels(
     db: DBDep,
-) -> list[SHotelGet] | None:
-    return await HotelService(db).get_hotels()
+    limit: int = Query(5, ge=1, le=20)
+) -> List[SHotelGet]:
+    return await HotelService(db).get_top_hotels(limit=limit)
 
 
+@router.get("/count", summary="Получить общее количество отелей")
+async def get_hotels_count(db: DBDep) -> dict[str, int]:
+    count = await HotelService(db).get_hotels_count()
+    return {"total_hotels": count}
+
+
+@router.get("/by-country/{country}", summary="Отели по стране")
+async def get_hotels_by_country(country: str, db: DBDep) -> List[SHotelGet]:
+    hotels = await HotelService(db).get_hotels_by_country(country)
+    if not hotels:
+        raise HTTPException(status_code=404, detail=f"Нет отелей в стране '{country}'")
+    return hotels
 
