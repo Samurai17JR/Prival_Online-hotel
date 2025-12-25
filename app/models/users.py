@@ -1,7 +1,10 @@
 from datetime import datetime,date
 from typing import List
-from sqlalchemy import String, DateTime,func
+from sqlalchemy import ForeignKey, String, DateTime,func
 from sqlalchemy.orm import Mapped, mapped_column, relationship
+
+from app.models.bookings import Booking
+from app.models.reviews import Review
 from .base import Base
 
 class User(Base):
@@ -17,3 +20,7 @@ class User(Base):
 
     bookings: Mapped[List["Booking"]] = relationship(back_populates="users")
     reviews: Mapped[List["Review"]] = relationship(back_populates="users")
+    
+    role_id: Mapped[int] = mapped_column(ForeignKey("roles.id"), nullable=False)
+    role: Mapped["roles"] = relationship(back_populates="users") # type: ignore
+    

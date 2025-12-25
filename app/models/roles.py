@@ -1,7 +1,10 @@
+from typing import TYPE_CHECKING
 from sqlalchemy import Column, Integer, String, Text, DateTime, ForeignKey, Boolean, DECIMAL, DATE
 from sqlalchemy.orm import declarative_base, relationship,mapped_column,Mapped
 from datetime import datetime,date
 from .base import Base
+if TYPE_CHECKING:
+    from app.models.users import User
 
 
 class Role(Base):
